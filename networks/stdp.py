@@ -15,7 +15,10 @@ spike-timing dependent plasticity in neuromorphic hardware.
 Front. Neurosci. 6 (90).
 arXiv:1201.6255 [q-bio.NC]
 '''
+from __future__ import print_function
+from __future__ import division
 
+from past.utils import old_div
 import pyNN.hardware.spikey as pynn
 import numpy as np
 
@@ -88,25 +91,25 @@ pynn.hardware.hwa.autoSTDPFrequency = runtime
 pynn.run(runtime)
 
 # get weight after emulation
-weightAfter = prj.getWeightsHW(readHW=True, format='list')[0] / pynn.minExcWeight()
+weightAfter = old_div(prj.getWeightsHW(readHW=True, format='list')[0], pynn.minExcWeight())
 spikeTimes = neuron.getSpikes()[:,1]
 pynn.end()
 
 # analysis
-print 'Number of stimulating / presynaptic / postsynaptic spikes:', len(stimulus), len(stimulusPlastic), len(spikeTimes)
+print('Number of stimulating / presynaptic / postsynaptic spikes:', len(stimulus), len(stimulusPlastic), len(spikeTimes))
 
 if len(stimulusPlastic) != len(spikeTimes):
-    print 'Not each presynaptic spike has a single postsynaptic partner!'
-    print '\nstimulating spikes:'
-    print stimulus
-    print '\npresynaptic spikes:'
-    print stimulusPlastic
-    print '\npostsynaptic spikes:'
-    print spikeTimes
+    print('Not each presynaptic spike has a single postsynaptic partner!')
+    print('\nstimulating spikes:')
+    print(stimulus)
+    print('\npresynaptic spikes:')
+    print(stimulusPlastic)
+    print('\npostsynaptic spikes:')
+    print(spikeTimes)
     exit()
 timingMeasured = np.mean(spikeTimes - stimulusPlastic)
-print 'Time interval between pre- and postsynaptic spike (is / should / limit):', timingMeasured, '/', timingPrePostPlastic, '/', spikePrecision
+print('Time interval between pre- and postsynaptic spike (is / should / limit):', timingMeasured, '/', timingPrePostPlastic, '/', spikePrecision)
 if abs(timingMeasured - timingPrePostPlastic) > spikePrecision:
-    print 'Time interval between pre- and postsynaptic deviates from expectation. Adjust delay parameter.'
-print 'Synaptic weight before / after emulation (in digital hardware values):', weightPlastic, weightAfter
+    print('Time interval between pre- and postsynaptic deviates from expectation. Adjust delay parameter.')
+print('Synaptic weight before / after emulation (in digital hardware values):', weightPlastic, weightAfter)
 

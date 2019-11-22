@@ -8,6 +8,7 @@ For low input rates the synaptic efficacy recovers.
 '''
 
 # for plotting without X-server
+from builtins import zip
 import matplotlib as mpl
 mpl.use('Agg')
 
@@ -40,7 +41,7 @@ pynn.record_v(neuron[0], '')
 
 pynn.run(runtime)
 
-membrane = np.array(zip(pynn.timeMembraneOutput, pynn.membraneOutput))
+membrane = np.array(list(zip(pynn.timeMembraneOutput, pynn.membraneOutput)))
 
 pynn.end()
 

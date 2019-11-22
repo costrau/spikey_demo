@@ -1,3 +1,5 @@
+from __future__ import print_function
+from builtins import range
 import pyNN.nest as pynn
 import numpy as np
 
@@ -27,8 +29,8 @@ stimWeight = 0.1
 weightMax = 0.001
 measureWeight = weightMax / 15.0 * 7.0 #init digital weight of "hardware" synapse to 7
 aThresh = 2.0
-lutCausal = range(1, 16) + [15]
-lutAnticausal = [0] + range(0, 15)
+lutCausal = list(range(1, 16)) + [15]
+lutAnticausal = [0] + list(range(0, 15))
 #parameters to configure STDP synapses to be conform with the Spikey neuromorphic chip:
 #- apply lutCausal if (a_c - a_a) > a_thresh_tl
 #- apply lutAnticausal if (a_a - a_c) > a_thresh_tl
@@ -44,7 +46,7 @@ synapseParams = { 'tau_plus'            : tauSyn,
                   'a_thresh_tl'         : aThresh,
                   'lookuptable_0'       : lutCausal,
                   'lookuptable_1'       : lutAnticausal,
-                  'lookuptable_2'       : range(16),           # should not occur
+                  'lookuptable_2'       : list(range(16)),           # should not occur
                   #'synapses_per_driver' : 50,
                   #'driver_readout_time' : 15.0,
                   #'reset_pattern'       : 6 * [1],             # reset a_c and a_a after weight update
@@ -95,12 +97,12 @@ for timeNow in timeGrid:
 spikes = neuron.getSpikes()
 #membrane = neuron.get_v() #for debugging
 
-print 'presynaptic spikes (static synapse)'
-print stimSpikes
-print 'presynaptic spikes (plastic synapse)'
-print measureSpikes
-print 'postsynaptic spikes'
-print spikes
+print('presynaptic spikes (static synapse)')
+print(stimSpikes)
+print('presynaptic spikes (plastic synapse)')
+print(measureSpikes)
+print('postsynaptic spikes')
+print(spikes)
 
 pynn.end()
 

@@ -9,8 +9,11 @@ Pfeil et al. (2014).
 The effect of heterogeneity on decorrelation mechanisms in spiking neural networks: a neuromorphic-hardware study.
 arXiv:1411.7916 [q-bio.NC].
 '''
+from __future__ import print_function
+from __future__ import division
 
 # for plotting without X-server
+from past.utils import old_div
 import matplotlib as mpl
 mpl.use('Agg')
 
@@ -36,7 +39,7 @@ spikes = neurons.getSpikes()
 pynn.end()
 
 # visualize
-print 'mean firing rate:', round(len(spikes) / runtime / popSize * 1000.0, 1), '1/s'
+print('mean firing rate:', round(old_div(old_div(len(spikes), runtime), popSize) * 1000.0, 1), '1/s')
 
 import matplotlib.pyplot as plt
 

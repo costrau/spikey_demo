@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+from __future__ import print_function
+from __future__ import division
+from past.utils import old_div
 import pyNN.hardware.spikey as pynn
 import numpy as np
 import matplotlib.pyplot as plt
@@ -25,7 +28,7 @@ stimuli = pynn.Population(1, pynn.SpikeSourceArray, stimProp)
 prj = pynn.Projection(stimuli, neurons, pynn.AllToAllConnector(weights=weight * pynn.minExcWeight()), target='excitatory')
 
 #modify properties of synapse driver
-print 'Range of calibration factors of drvifall for excitatory connections', prj.getDrvifallFactorsRange('exc')
+print('Range of calibration factors of drvifall for excitatory connections', prj.getDrvifallFactorsRange('exc'))
 prj.setDrvifallFactors([0.8])
 #prj.setDrvioutFactors([1.0])
 
@@ -40,7 +43,7 @@ timeNorm = time - time[0]
 #number of data points per interval
 lenInterval = np.argmin(abs(time - durationInterval))
 #number of intervals
-numInterval = int(len(mem) / lenInterval)
+numInterval = int(old_div(len(mem), lenInterval))
 #trim membrane data
 memCut = mem[:numInterval * lenInterval]
 #split membrane data into intervals

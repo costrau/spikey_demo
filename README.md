@@ -3,9 +3,9 @@ Building software for the Spikey neuromorphic System
 
 Configure, build and install:
 
-    $ ./waf setup --project=deb-pynn@0.6
-    $ ./waf configure
-    $ ./waf install --targets=*
+    $ python3 waf setup --project=deb-pynn@0.6 --repo-db-url=https://github.com/electronicvisions/projects
+    $ python3 waf configure
+    $ python3 waf install --targets=*
 
 Run:
 

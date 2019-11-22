@@ -8,8 +8,10 @@ Pfeil et al. (2013).
 Six networks on a universal neuromorphic computing substrate.
 Front. Neurosci. 7 (11).
 '''
+from __future__ import print_function
 
 # for plotting without X-server
+from builtins import range
 import matplotlib as mpl
 mpl.use('Agg')
 
@@ -80,7 +82,7 @@ membraneTime = pynn.timeMembraneOutput
 pynn.end()
 
 # visualize
-print 'number of spikes:', len(spikeCollector)
+print('number of spikes:', len(spikeCollector))
 
 import matplotlib.pyplot as plt
 

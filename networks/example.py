@@ -5,6 +5,7 @@ Demonstration script for the usage of pyNN
 with the Spikey neuromorphic hardware system
 by Thomas Pfeil, thomas.pfeil@kip.uni-heidelberg.de
 '''
+from __future__ import print_function
 
 ####################################################################
 # Experiment setup:
@@ -110,8 +111,8 @@ pynn.end()
 ####################################################################
 
 import numpy as np
-print 'average membrane potential:', np.mean(membrane), 'mV'
-print 'sampling step for membrane potential:', membraneTime[1] - membraneTime[0], 'ms'
+print('average membrane potential:', np.mean(membrane), 'mV')
+print('sampling step for membrane potential:', membraneTime[1] - membraneTime[0], 'ms')
 
 import matplotlib.pyplot as plt
 

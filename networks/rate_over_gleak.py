@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from __future__ import division
+from past.utils import old_div
 import pyNN.hardware.spikey as pynn
 import numpy as np
 import matplotlib.pyplot as plt
@@ -26,7 +28,7 @@ neurons.record()
 for gLeakValue in gLeakList:
     neurons.set({'g_leak': gLeakValue})
     pynn.run(runtime)
-    resultCollector.append([gLeakValue, float(len(neurons.getSpikes())) / noNeurons / runtime * 1e3])
+    resultCollector.append([gLeakValue, old_div(float(len(neurons.getSpikes())) / noNeurons, runtime) * 1e3])
 pynn.end()
 
 #plot results
